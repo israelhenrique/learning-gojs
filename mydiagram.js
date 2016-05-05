@@ -1,7 +1,10 @@
+var myDiagram ={}
+var $ = go.GraphObject.make;
+
 function init() {
 
-var $ = go.GraphObject.make;
-var myDiagram =
+
+myDiagram =
   $(go.Diagram, "teste",
     {
       initialContentAlignment: go.Spot.Center, // center Diagram contents
@@ -29,16 +32,16 @@ var myDiagram =
           new go.Binding("text", "name"))
       );
 
-    var model = $(go.Model);
+    var model = $(go.TreeModel);
     model.nodeDataArray =
     [ // note that each node data object holds whatever properties it needs;
       // for this app we add the "name" and "source" properties
-      { background: "red", name: "Don Meow", source: "cat1.png" },
-      { name: "Copricat", source: "cat2.png" },
-      { name: "Demeter",  source: "cat3.png" },
-      { /* Empty node data */  }
+      { key: "1",  background: "yellow", name: "Don Meow", source: "cat1.png" },
+      { key: "2", parent: "1", name: "Copricat", source: "cat2.png" },
+      { key: "3", parent: "1", name: "Demeter",  source: "cat3.png" },
+      { key: "4", parent: "3", /* Empty node data */  }
     ];
+
+
     myDiagram.model = model;
-
-
 }
