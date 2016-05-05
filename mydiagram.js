@@ -45,3 +45,14 @@ myDiagram =
 
     myDiagram.model = model;
 }
+
+function treeLayout(){
+  myDiagram.layout = $(go.TreeLayout, // specify a Diagram.layout that arranges trees
+                 { angle: 90, layerSpacing: 35 })
+
+}
+function circularLayout(){
+  myDiagram.layout = $(go.CircularLayout, // specify a Diagram.layout that arranges trees
+                 { spacing: 35 })
+
+}
