@@ -5,13 +5,22 @@
   <!-- use go-debug.js when developing and go.js when deploying -->
   <script src="go-debug.js"></script>
   <script src="mydiagram.js"></script>
+  <script src="dataInspector.js"></script>
+  <link rel="stylesheet" href="dataInspector.css"></link>
 </head>
 <body onload="init();">
-  <div style="width:800px; height:50px; background-color: #DAE4E4;">
-    <button type="button" onClick="treeLayout();">Tree Layout</button>
-    <button type="button" onClick="circularLayout();">Circular Layout</button>
+
+  <div style="float: left">
+    <div style="width:800px; height:50px; background-color: #DAE4E4;">
+      <button type="button" onClick="treeLayout();">Tree Layout</button>
+      <button type="button" onClick="circularLayout();">Circular Layout</button>
+    </div>
+    <div id="teste" style="width:800px; height:600px; background-color: #DAE4E4;"></div>
   </div>
-  <div id="teste" style="width:800px; height:600px; background-color: #DAE4E4;"></div>
+  <span style="horizontal-align: top; float:left">
+      Selected Part:<br>
+      <div id="myInspectorDiv" class="inspector"> </div><br>
+    </span>
 
 
 

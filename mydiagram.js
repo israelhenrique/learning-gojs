@@ -13,17 +13,15 @@ myDiagram =
 
     // define a simple Node template
     myDiagram.nodeTemplate =
-      $(go.Node, "Horizontal",
+      $(go.Node, "Auto",
         // the entire node will have a light-blue background
         { background: "#44CCFF" },
         new go.Binding("background"),
-        $(go.Picture,
-          // Pictures should normally have an explicit width and height.
-          // This picture has a red background, only visible when there is no source set
-          // or when the image is partially transparent.
-          { margin: 10, width: 50, height: 50, background: "red" },
-          // Picture.source is data bound to the "source" attribute of the model data
-          new go.Binding("source")),
+        $(go.Shape, "Rectangle",
+          {
+            fill: "blue"
+          },
+          new go.Binding("fill", "color")),
         $(go.TextBlock,
           "Default Text",  // the initial value for TextBlock.text
           // some room around the text, a larger font, and a white stroke:
@@ -36,14 +34,31 @@ myDiagram =
     model.nodeDataArray =
     [ // note that each node data object holds whatever properties it needs;
       // for this app we add the "name" and "source" properties
-      { key: "1",  background: "yellow", name: "Don Meow", source: "cat1.png" },
-      { key: "2", parent: "1", name: "Copricat", source: "cat2.png" },
-      { key: "3", parent: "1", name: "Demeter",  source: "cat3.png" },
-      { key: "4", parent: "3", /* Empty node data */  }
+      { key: "1",  background: "yellow", name: "Don Meow", color: "red" },
+      { key: "2", parent: "1", name: "Copricat", color: "red"},
+      { key: "3", parent: "1", name: "Demeter", color: "red" },
+      { key: "4", parent: "3", color: "red" }
     ];
 
 
     myDiagram.model = model;
+
+    var inspector = new Inspector('myInspectorDiv', myDiagram,
+      {
+        // uncomment this line to only inspect the named properties below instead of all properties on each object:
+        // includesOwnProperties: false,
+        properties: {
+          // key would be automatically added for nodes, but we want to declare it read-only also:
+          "key": { readOnly: true, show: Inspector.showIfPresent },
+          // color would be automatically added for nodes, but we want to declare it a color also:
+          "color": { show: Inspector.showIfPresent, type: 'color' },
+          // Comments and LinkComments are not in any node or link data (yet), so we add them here:
+          "Comments": { show: Inspector.showIfNode  },
+          "flag": { show: Inspector.showIfNode, type: 'boolean', defaultValue: true  },
+          "LinkComments": { show: Inspector.showIfLink },
+        }
+      });
+
 }
 
 function treeLayout(){
