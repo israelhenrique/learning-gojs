@@ -2,6 +2,10 @@
 <!DOCTYPE html>  <!-- HTML5 document type -->
 <html>
 <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
   <!-- use go-debug.js when developing and go.js when deploying -->
   <script src="go-debug.js"></script>
   <script src="mydiagram.js"></script>
@@ -12,6 +16,10 @@
 
   <div style="float: left">
     <div style="width:800px; height:50px; background-color: #DAE4E4;">
+      <div id="myInspectorDiv" class="inspector"> </div>
+      <input type="color"></input>
+      <!--<span id="background-color" class="glyphicon glyphicon-text-background"> </span>-->
+
       <button type="button" onClick="treeLayout();">Tree Layout</button>
       <button type="button" onClick="circularLayout();">Circular Layout</button>
     </div>
@@ -19,8 +27,9 @@
   </div>
   <span style="horizontal-align: top; float:left">
       Selected Part:<br>
-      <div id="myInspectorDiv" class="inspector"> </div><br>
+      <br>
     </span>
-
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
 </body>
 </html>

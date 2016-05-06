@@ -49,11 +49,9 @@ myDiagram =
         // uncomment this line to only inspect the named properties below instead of all properties on each object:
        includesOwnProperties: false,
         properties: {
-          // key would be automatically added for nodes, but we want to declare it read-only also:
-          "name": { readOnly: true, show: Inspector.showIfPresent },
           // color would be automatically added for nodes, but we want to declare it a color also:
           "color": { show: Inspector.showIfPresent, type: 'color' },
-          "font": {  type: 'font'},
+
         }
       });
 }
