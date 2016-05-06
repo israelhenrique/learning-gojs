@@ -74,11 +74,15 @@ function Inspector(divid, diagram, options) {
 
   var self = this;
   diagram.addModelChangedListener(function(e) {
+
     if (e.isTransactionFinished) self.inspectObject();
   });
   if (this.inspectsSelection) {
-    diagram.addDiagramListener('ChangedSelection', function(e) { self.inspectObject(); });
+    diagram.addDiagramListener('ChangedSelection', function(e) { self.inspectObject();});
+
   }
+
+
 }
 
 // Some static predicates to use with the "show" property.
@@ -149,6 +153,7 @@ Inspector.prototype.inspectObject = function(object) {
 
   table.appendChild(tbody);
   mainDiv.appendChild(table);
+  gambiarra();
 };
 
 /**
@@ -210,14 +215,16 @@ Inspector.prototype.buildPropertyRow = function(propertyName, propertyValue) {
   input.tabIndex = this.tabIndex++;
 
   var self = this;
-  function setprops() { self.setAllDataProperties(); }
-
+  function setprops() { console.log(propertyValue); self.setAllDataProperties(); }
   input.value = propertyValue;
   if (decProp !== undefined) {
     input.disabled = !this.canEditProperty(propertyName, decProp, this.inspectedObject);
     if (decProp.type === 'color') {
+      //input.setAttribute('type', 'color');
+      input.setAttribute('id', 'mycolor');
+      input.setAttribute('class', 'colorPicker evo-cp0');
       input.setAttribute('type', 'color');
-      if (input.type === 'color') {
+      if (input.id === 'mycolor') {
         input.addEventListener('input', setprops);
         input.addEventListener('change', setprops);
         input.value = this.setColor(propertyValue);
@@ -232,6 +239,7 @@ Inspector.prototype.buildPropertyRow = function(propertyName, propertyValue) {
   tr.appendChild(td2);
 
   this._inspectedProperties[propertyName] = input;
+
   return tr;
 };
 
@@ -334,4 +342,11 @@ Inspector.prototype.setAllDataProperties = function() {
 */
 Inspector.prototype.isBoolean = function(value) {
   return value === true || value === false;
+}
+
+function gambiarra(){
+
+  $(document).ready(function() {
+      $("#mycolor").colorpicker();});
+  console.log("tsc")
 }

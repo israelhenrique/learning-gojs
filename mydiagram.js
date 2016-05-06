@@ -1,11 +1,11 @@
 var myDiagram ={}
-var $ = go.GraphObject.make;
+var MAKE = go.GraphObject.make;
 
 function init() {
 
 
 myDiagram =
-  $(go.Diagram, "teste",
+  MAKE(go.Diagram, "teste",
     {
       initialContentAlignment: go.Spot.Center, // center Diagram contents
       "undoManager.isEnabled": true // enable Ctrl-Z to undo and Ctrl-Y to redo
@@ -13,16 +13,16 @@ myDiagram =
 
     // define a simple Node template
     myDiagram.nodeTemplate =
-      $(go.Node, "Auto",
+      MAKE(go.Node, "Auto",
         // the entire node will have a light-blue background
         { background: "#44CCFF" },
         new go.Binding("background"),
-        $(go.Shape, "Rectangle",
+        MAKE(go.Shape, "Rectangle",
           {
             fill: "blue"
           },
           new go.Binding("fill", "color")),
-        $(go.TextBlock,
+        MAKE(go.TextBlock,
           "Default Text",  // the initial value for TextBlock.text
           // some room around the text, a larger font, and a white stroke:
           { margin: 12, stroke: "white", font: "bold 16px sans-serif" },
@@ -31,7 +31,7 @@ myDiagram =
           new go.Binding("text", "name"))
       );
 
-    var model = $(go.TreeModel);
+    var model = MAKE(go.TreeModel);
     model.nodeDataArray =
     [ // note that each node data object holds whatever properties it needs;
       // for this app we add the "name" and "source" properties
@@ -57,12 +57,12 @@ myDiagram =
 }
 
 function treeLayout(){
-  myDiagram.layout = $(go.TreeLayout, // specify a Diagram.layout that arranges trees
+  myDiagram.layout = MAKE(go.TreeLayout, // specify a Diagram.layout that arranges trees
                  { angle: 90, layerSpacing: 35 })
 
 }
 function circularLayout(){
-  myDiagram.layout = $(go.CircularLayout, // specify a Diagram.layout that arranges trees
+  myDiagram.layout = MAKE(go.CircularLayout, // specify a Diagram.layout that arranges trees
                  { spacing: 35 })
 
 }
