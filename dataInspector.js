@@ -153,7 +153,6 @@ Inspector.prototype.inspectObject = function(object) {
 
   table.appendChild(tbody);
   mainDiv.appendChild(table);
-  gambiarra();
 };
 
 /**
@@ -215,19 +214,21 @@ Inspector.prototype.buildPropertyRow = function(propertyName, propertyValue) {
   input.tabIndex = this.tabIndex++;
 
   var self = this;
-  function setprops() { console.log(propertyValue); self.setAllDataProperties(); }
+  function setprops() {  self.setAllDataProperties(); }
   input.value = propertyValue;
   if (decProp !== undefined) {
     input.disabled = !this.canEditProperty(propertyName, decProp, this.inspectedObject);
     if (decProp.type === 'color') {
       //input.setAttribute('type', 'color');
-      input.setAttribute('id', 'mycolor');
-      input.setAttribute('class', 'colorPicker evo-cp0');
       input.setAttribute('type', 'color');
-      if (input.id === 'mycolor') {
+      input.setAttribute('id', 'inputcolor');
+      if (input.id === 'inputcolor') {
         input.addEventListener('input', setprops);
         input.addEventListener('change', setprops);
         input.value = this.setColor(propertyValue);
+        var elements = document.getElementsByClassName("evo-pointer evo-colorind-ff")
+        elements[0].setAttribute("style","background-color: " + input.value)
+
       }
     }
   }
@@ -342,11 +343,4 @@ Inspector.prototype.setAllDataProperties = function() {
 */
 Inspector.prototype.isBoolean = function(value) {
   return value === true || value === false;
-}
-
-function gambiarra(){
-
-  $(document).ready(function() {
-      $("#mycolor").colorpicker();});
-  console.log("tsc")
 }

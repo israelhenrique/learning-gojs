@@ -25,13 +25,25 @@
       <!--<span id="background-color" class="glyphicon glyphicon-text-background"> </span>-->
       <button type="button" onClick="treeLayout();">Tree Layout</button>
       <button type="button" onClick="circularLayout();">Circular Layout</button>
+      <span style="horizontal-align: top; float:left">
+      <input id="mycolor" style=" width:0px; height:0px; display: none;"/>
+      <script>
+            $(document).ready(function() {
+            $("#mycolor").colorpicker();});
+            $("#mycolor").on("change.color", function(event, color){
+            var inputcolor = document.getElementById("inputcolor")
+            var event2 = new Event("change")
+            inputcolor.value = color
+            inputcolor.dispatchEvent(event2);
+            console.log("entrou")
+          });
+        console.log("tsc")</script>
+        </span>
     </div>
     <div id="teste" style="width:800px; height:600px; background-color: #DAE4E4;"></div>
   </div>
   <span style="horizontal-align: top; float:left">
-      Selected Part:<br>
-        <div id="myInspectorDiv" class="inspector"></div>
-      <br>
+        <div id="myInspectorDiv" class="inspector" style=" width:0px; height:0px; display: none;"></div>
     </span>
 
 
