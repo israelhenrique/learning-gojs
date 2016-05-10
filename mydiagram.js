@@ -1,5 +1,11 @@
 var myDiagram ={}
+var inputColor = {}
 var MAKE = go.GraphObject.make;
+
+var selectionButton = {}
+
+
+
 
 function init() {
 
@@ -19,13 +25,13 @@ myDiagram =
         new go.Binding("background"),
         MAKE(go.Shape, "Rectangle",
           {
-            fill: "blue"
+            fill: "blue", name: "SHAPE"
           },
           new go.Binding("fill", "color")),
         MAKE(go.TextBlock,
           "Default Text",  // the initial value for TextBlock.text
           // some room around the text, a larger font, and a white stroke:
-          { margin: 12, stroke: "white", font: "bold 16px sans-serif" },
+          { margin: 12, stroke: "white", font: "italic bold 16px sans-serif", name: "TEXTBLOCK" },
           // TextBlock.text is data bound to the "name" attribute of the model data
           new go.Binding("font", "font"),
           new go.Binding("text", "name"))
@@ -41,19 +47,56 @@ myDiagram =
       { key: "4", parent: "3",  name: "Tsc", color: "red" }
     ];
 
-
     myDiagram.model = model;
 
-    var inspector = new Inspector('myInspectorDiv', myDiagram,
-      {
-        // uncomment this line to only inspect the named properties below instead of all properties on each object:
-       includesOwnProperties: false,
-        properties: {
-          // color would be automatically added for nodes, but we want to declare it a color also:
-          "color": { show: Inspector.showIfPresent, type: 'color' },
-
+    /*selectionButton = document.getElementById("selectionButton");
+    selectionButton.addEventListener("input", function() {
+      myDiagram.startTransaction("change color");
+      var it = myDiagram.selection.iterator;
+      while (it.next()) {
+        var node = it.value;
+        var shape = node.findObject("SHAPE");
+        if (shape !== null) {
+          shape.fill = selectionButton.value;
         }
-      });
+      }
+      myDiagram.commitTransaction("change color");
+    });*/
+
+    colorButton = document.getElementById("demo2");
+    colorButton.addEventListener("input", function() {
+      myDiagram.startTransaction("change color");
+      var it = myDiagram.selection.iterator;
+      while (it.next()) {
+        var node = it.value;
+        var shape = node.findObject("SHAPE");
+        if (shape !== null) {
+          shape.fill = colorButton.value;
+        }
+      }
+      myDiagram.commitTransaction("change color");
+    });
+
+    var boldButton = document.getElementById("bold");
+    boldButton.addEventListener("click", function() {
+      myDiagram.startTransaction("change font");
+      var it = myDiagram.selection.iterator;
+      while (it.next()) {
+        var node = it.value;
+        var textBlock = node.findObject("TEXTBLOCK");
+        if (textBlock !== null) {
+          console.log(textBlock.font)
+        }
+      }
+      myDiagram.commitTransaction("change font");
+    });
+
+}
+
+function setBold(){
+
+
+
 }
 
 function treeLayout(){

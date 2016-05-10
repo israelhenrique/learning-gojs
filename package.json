@@ -1,0 +1,22 @@
+{
+  "name": "learning-gojs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gojs.htm",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/israelhenrique/learning-gojs.git"
+  },
+  "author": "Israel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/israelhenrique/learning-gojs/issues"
+  },
+  "homepage": "https://github.com/israelhenrique/learning-gojs#readme",
+  "dependencies": {
+    "bootstrap": "^3.3.6"
+  }
+}
