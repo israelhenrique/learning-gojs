@@ -93,7 +93,7 @@ myDiagram =
     });
 
     var italicButton = document.getElementById("italic");
-    italic.addEventListener("click", function() {
+    italicButton.addEventListener("click", function() {
       myDiagram.startTransaction("change font style");
       var it = myDiagram.selection.iterator;
       var equalStylesVar = equalStyles('italic',myDiagram.selection.iterator)
@@ -102,6 +102,21 @@ myDiagram =
         var textBlock = node.findObject("TEXTBLOCK");
         if (textBlock !== null) {
           textBlock.font = setFontStyle('italic',textBlock.font,equalStylesVar)
+        }
+      }
+      myDiagram.commitTransaction("change font style");
+    });
+
+    var underlineButton = document.getElementById("underline");
+    underlineButton.addEventListener("click", function() {
+      myDiagram.startTransaction("change font style");
+      var it = myDiagram.selection.iterator;
+      var equalStylesVar = equalStyles('underline',myDiagram.selection.iterator)
+      while (it.next()) {
+        var node = it.value;
+        var textBlock = node.findObject("TEXTBLOCK");
+        if (textBlock !== null) {
+          textBlock.isUnderline = setFontStyle('underline',textBlock.isUnderline,equalStylesVar)
         }
       }
       myDiagram.commitTransaction("change font style");
@@ -116,12 +131,18 @@ function equalStyles(style,selectedModels){
     var node = it.value;
     var textBlock = node.findObject("TEXTBLOCK");
     if (textBlock !== null) {
-      if (textBlock.font.search(style) == -1) {
-        return false
+
+      if (style === 'underline') {
+        if (textBlock.isUnderline === null || !textBlock.isUnderline) {
+          return false
+        }
+      } else {
+        if (textBlock.font.search(style) == -1) {
+          return false
+        }
       }
     }
   }
-
   return true
 }
 
@@ -154,10 +175,22 @@ function setFontStyle(style, font, equalStyles){
 
         }
         break;
+        case 'underline':
+          if (equalStyles) {
+
+            newFont = false;
+
+          } else if (font === null || !font){
+
+            newFont = true
+
+          }
+          break;
     default:
 
   }
 
+  console.log(newFont)
 
   return newFont
 }
