@@ -14,6 +14,7 @@
   <style>
   .color-fill-icon{display:inline-block;width:16px;height:16px;border:1px solid #000;background-color:#fff;margin: 2px;}
   .dropdown-color-fill-icon{position:relative;float:left;margin-left:0;margin-right: 0}
+  .btn{width: 34px; margin-left: -4px;}
 
   </style>
   <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -28,12 +29,14 @@
       <button type="button" onClick="treeLayout();">Tree Layout</button>
       <button type="button" onClick="circularLayout();">Circular Layout</button>-->
       <!--<input id="selectionButton" type="color"/>-->
-      <div class="btn-group btn-group-sm">
-        <button type="button" class="btn btn-default" id="demo2"><span class="color-fill-icon dropdown-color-fill-icon" style="background-color:#000;"></span>&nbsp;<b class="caret"></b></button>
-      </div>
+      <span style="margin-left: 4px;">
       <button id="bold" class="btn btn-default">B</button>
       <button id="italic" class="btn btn-default">I</button>
       <button id="underline" class="btn btn-default" style="text-decoration: underline;">S</button>
+      <div class="btn-group btn-group-sm">
+        <button type="button" class="btn btn-default" id="demo2" style="width: 49px;"><span class="color-fill-icon dropdown-color-fill-icon" style="background-color:#000;"></span>&nbsp;<b class="caret"></b></button>
+      </div>
+    </span>
     <div id="teste" style="width:800px; height:600px; background-color: #DAE4E4;"></div>
   </div>
   <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
