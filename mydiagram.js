@@ -81,11 +81,13 @@ myDiagram =
     boldButton.addEventListener("click", function() {
       myDiagram.startTransaction("change font");
       var it = myDiagram.selection.iterator;
+      var isAllBoldVar = isAllBold(myDiagram.selection.iterator)
+      console.log(isAllBoldVar)
       while (it.next()) {
         var node = it.value;
         var textBlock = node.findObject("TEXTBLOCK");
         if (textBlock !== null) {
-          console.log(textBlock.font)
+          textBlock.font = setBold(textBlock.font,isAllBoldVar)
         }
       }
       myDiagram.commitTransaction("change font");
@@ -93,10 +95,37 @@ myDiagram =
 
 }
 
-function setBold(){
+function isAllBold(selectedModels){
 
+  var it = selectedModels.iterator;
+  while (it.next()) {
+    var node = it.value;
+    var textBlock = node.findObject("TEXTBLOCK");
+    if (textBlock !== null) {
+      if (textBlock.font.search('bold') == -1) {
+        return false
+      }
+    }
+  }
 
+  return true
+}
 
+function setBold(font, isAllBold){
+
+  var newFont = font
+
+  if (isAllBold) {
+
+    newFont = font.replace('bold ', '');
+
+  } else if (font.search('bold') == -1){
+
+    newFont = `bold ${font}`
+
+  }
+
+  return newFont
 }
 
 function treeLayout(){
