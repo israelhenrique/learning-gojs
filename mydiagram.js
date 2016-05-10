@@ -92,6 +92,21 @@ myDiagram =
       myDiagram.commitTransaction("change font style");
     });
 
+    var italicButton = document.getElementById("italic");
+    italic.addEventListener("click", function() {
+      myDiagram.startTransaction("change font style");
+      var it = myDiagram.selection.iterator;
+      var equalStylesVar = equalStyles('italic',myDiagram.selection.iterator)
+      while (it.next()) {
+        var node = it.value;
+        var textBlock = node.findObject("TEXTBLOCK");
+        if (textBlock !== null) {
+          textBlock.font = setFontStyle('italic',textBlock.font,equalStylesVar)
+        }
+      }
+      myDiagram.commitTransaction("change font style");
+    });
+
 }
 
 function equalStyles(style,selectedModels){
@@ -111,11 +126,12 @@ function equalStyles(style,selectedModels){
 }
 
 
-function setFontStyle(style,font, equalStyles){
+function setFontStyle(style, font, equalStyles){
 
   var newFont = font
 
   switch (style) {
+
     case 'bold':
       if (equalStyles) {
 
@@ -127,6 +143,17 @@ function setFontStyle(style,font, equalStyles){
 
       }
       break;
+      case 'italic':
+        if (equalStyles) {
+
+          newFont = font.replace('italic ', '');
+
+        } else if (font.search('italic') == -1){
+
+          newFont = `italic ${font}`
+
+        }
+        break;
     default:
 
   }
@@ -134,6 +161,7 @@ function setFontStyle(style,font, equalStyles){
 
   return newFont
 }
+
 
 function treeLayout(){
   myDiagram.layout = MAKE(go.TreeLayout, // specify a Diagram.layout that arranges trees
