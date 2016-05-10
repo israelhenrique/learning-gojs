@@ -79,30 +79,29 @@ myDiagram =
 
     var boldButton = document.getElementById("bold");
     boldButton.addEventListener("click", function() {
-      myDiagram.startTransaction("change font");
+      myDiagram.startTransaction("change font style");
       var it = myDiagram.selection.iterator;
-      var isAllBoldVar = isAllBold(myDiagram.selection.iterator)
-      console.log(isAllBoldVar)
+      var equalStylesVar = equalStyles('bold',myDiagram.selection.iterator)
       while (it.next()) {
         var node = it.value;
         var textBlock = node.findObject("TEXTBLOCK");
         if (textBlock !== null) {
-          textBlock.font = setBold(textBlock.font,isAllBoldVar)
+          textBlock.font = setFontStyle('bold',textBlock.font,equalStylesVar)
         }
       }
-      myDiagram.commitTransaction("change font");
+      myDiagram.commitTransaction("change font style");
     });
 
 }
 
-function isAllBold(selectedModels){
+function equalStyles(style,selectedModels){
 
   var it = selectedModels.iterator;
   while (it.next()) {
     var node = it.value;
     var textBlock = node.findObject("TEXTBLOCK");
     if (textBlock !== null) {
-      if (textBlock.font.search('bold') == -1) {
+      if (textBlock.font.search(style) == -1) {
         return false
       }
     }
@@ -124,6 +123,30 @@ function setBold(font, isAllBold){
     newFont = `bold ${font}`
 
   }
+
+  return newFont
+}
+
+function setFontStyle(style,font, equalStyles){
+
+  var newFont = font
+
+  switch (style) {
+    case 'bold':
+      if (equalStyles) {
+
+        newFont = font.replace('bold ', '');
+
+      } else if (font.search('bold') == -1){
+
+        newFont = `bold ${font}`
+
+      }
+      break;
+    default:
+
+  }
+
 
   return newFont
 }
