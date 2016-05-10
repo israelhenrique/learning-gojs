@@ -110,22 +110,6 @@ function equalStyles(style,selectedModels){
   return true
 }
 
-function setBold(font, isAllBold){
-
-  var newFont = font
-
-  if (isAllBold) {
-
-    newFont = font.replace('bold ', '');
-
-  } else if (font.search('bold') == -1){
-
-    newFont = `bold ${font}`
-
-  }
-
-  return newFont
-}
 
 function setFontStyle(style,font, equalStyles){
 
