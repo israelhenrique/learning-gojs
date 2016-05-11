@@ -43,26 +43,7 @@
   <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
   <script src="dist/js/bootstrap-colorpicker.min.js"></script>
   <script src="dist/js/bootstrap-colorpicker-plus.js"></script>
-  <script type="text/javascript">
-  $(function(){
-
-      var demo2 = $('#demo2');
-      demo2.colorpickerplus();
-      demo2.on('changeColor', function(e,color){
-    if(color==null) {
-      //when select transparent color
-      $('.color-fill-icon', $(this)).addClass('colorpicker-color');
-    } else {
-      $('.color-fill-icon', $(this)).removeClass('colorpicker-color');
-          $('.color-fill-icon', $(this)).css('background-color', color);
-
-          colorButton.value = color
-          colorButton.dispatchEvent(new Event('input'));
-    }
-      });
-
-  });
-  </script>
+  <script src="toolbar.js"></script>
 
 </body>
 </html>
